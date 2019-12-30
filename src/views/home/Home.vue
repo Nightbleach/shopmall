@@ -6,6 +6,7 @@
     >
     </Carousel>
     <Avatars :recommend = recommend />
+    <feature-view/>
   </div>
 </template>
 
@@ -17,6 +18,7 @@ import { getHomeMultidata } from '../../network/home'
 import Navbar from '../../components/Navbar'
 import Carousel from './chileComponents/Carousel'
 import Avatars from './chileComponents/Avatars'
+import FeatureView from './chileComponents/FeatureView'
 export default {
   name: 'home',
   data () {
@@ -29,7 +31,8 @@ export default {
   components: {
     Navbar,
     Carousel,
-    Avatars
+    Avatars,
+    FeatureView
   },
   created () {
     getHomeMultidata().then(res => {
