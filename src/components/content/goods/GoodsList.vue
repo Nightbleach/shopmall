@@ -8,7 +8,7 @@
       :key="item.id"
     >
       <goods-list-item
-        :goods-item="item"
+        :goodsItem="item"
       />
     </v-col>
   </v-row>

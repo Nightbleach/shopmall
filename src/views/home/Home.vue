@@ -1,18 +1,27 @@
 <template>
   <div class="home">
     <Navbar/>
-    <Carousel
-      :banner = banner
+    <Scroll
+      class="homeContent"
+      ref="Scroll"
+      :probe-type="3"
+      @showHideScroll="showAndHide"
+      @pullingUp = 'loadMore'
     >
-    </Carousel>
-    <Avatars :recommend = recommend />
-    <feature-view/>
-    <tab-control
-      class="tagControl"
-      :title="['流行', '新款', '精选']"
-      @tagClick="tagClick"
-    />
-    <goods-list :goods="goods[currentType].list"/>
+      <Carousel
+        :banner = banner
+      >
+      </Carousel>
+      <Avatars :recommend = recommend />
+      <feature-view/>
+      <tab-control
+        class="tagControl"
+        :title="['流行', '新款', '精选']"
+        @tagClick="tagClick"
+      />
+      <goods-list :goods="goods[currentType].list"/>
+    </Scroll>
+    <back-top @click.native="backTop" v-show="isShowBackTop" />
   </div>
 </template>
 
@@ -27,6 +36,8 @@ import Avatars from './chileComponents/Avatars'
 import FeatureView from './chileComponents/FeatureView'
 import TabControl from '../../components/content/TabControl'
 import GoodsList from 'components/content/goods/GoodsList'
+import Scroll from 'components/content/scroll/Scroll'
+import BackTop from 'components/content/backTop/BackTop'
 export default {
   name: 'home',
   data () {
@@ -40,7 +51,8 @@ export default {
         'new': { page: 0, list: [] },
         'sell': { page: 0, list: [] }
       },
-      currentType: 'pop'
+      currentType: 'pop',
+      isShowBackTop: false
     }
   },
   components: {
@@ -49,7 +61,9 @@ export default {
     Avatars,
     FeatureView,
     TabControl,
-    GoodsList
+    GoodsList,
+    Scroll,
+    BackTop
   },
   created () {
     /*
@@ -65,6 +79,7 @@ export default {
   },
   methods: {
     /* 事件监听基本方法 */
+    // 这个方法中必须传入一个index 来获取用户点击的是哪一个index
     tagClick (index) {
       // console.log(index)
       // switch (index) {
@@ -86,6 +101,22 @@ export default {
         this.currentType = 'sell'
       }
     },
+    backTop () {
+    //  我们通过Scroll属性加上一个ref ,来获取子组件组件元素
+      this.$refs.Scroll.scroll.scrollTo(0, 0, 500)
+      // 另外，为了极致的组件封装开发，我们还可以改成
+      // this.$ref.scroll.scrollTo(0, 0)
+    },
+    showAndHide (position) {
+      // console.log(position)
+      this.isShowBackTop = -position.y > 600
+    },
+    loadMore () {
+      this.getHomeGoods(this.currentType)
+      /* ---------------有待理解-------------- */
+      this.$refs.Scroll.scroll.refresh()
+      /* ---------------有待理解-------------- */
+    },
     /* 网络请求方法 */
     getHomeMultidata () {
       getHomeMultidata().then(res => {
@@ -99,9 +130,18 @@ export default {
       // 获取page信息，是为了用户下拉鼠标获取新的更新数据
       const page = this.goods[ type ].page + 1
       getHomeGoods(type, page).then(res => {
+        // 因为我们有下拉加载更多数据的功能，所以用扩展运算符会比较好 跟concat() 比起来
         // 用扩展运算符... 把后端数据push到goods[type].list中
         this.goods[type].list.push(...res.data.list)
+        // 加载完新的数据，需要我们把已加载的页码加上
         this.goods[type].page += 1
+        /*
+        *因为使用了better-scroll加载更多的方法，
+        * 为了我们在使用第二次加载更多还需要调用他的一个方法
+        * 来表示可以在使用加载更多
+        * */
+        // this.$refs.Scroll.finishPullUp()
+        this.$refs.Scroll.scroll.finishPullUp()
       })
     }
   }
@@ -113,4 +153,6 @@ export default {
     position sticky
     top 0
     z-index 9
+  .homeContent
+    height 300px
 </style>

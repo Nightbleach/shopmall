@@ -26,14 +26,6 @@
         {{item.title}}
       </span>
     </v-col>
-<!--    <v-col cols="12">-->
-<!--      <span-->
-<!--        v-for="item in recommend"-->
-<!--        :key="item.id"-->
-<!--      >-->
-<!--       {{item.title}}-->
-<!--      </span>-->
-<!--    </v-col>-->
   </v-row>
 </v-container>
 </template>
