@@ -72,10 +72,23 @@ export default {
     * 让created中不用掺杂逻辑性的代码，工作上也是这么封装的
     * ------有助于代码的管理及美观
     * */
+    // 1. 请求多个数据
     this.getHomeMultidata() // 这样的代码很优雅 不是吗
+    // 2.请求商品数据
     this.getHomeGoods('pop')
     this.getHomeGoods('new')
     this.getHomeGoods('sell')
+  },
+  mounted () {
+    /*
+    * 需要特别注意的是，只要用$ref获取元素的时候，一定不能把他放在created的生命周期里
+    * 因为有的时候，在数据还没有加载完成的时候，是不能获取dom元素的
+    * 这个应该放在mounte里面
+    * */
+    // 3. 监听item中图片加载完成
+    this.$bus.$on('itemImageLoad', () => {
+      this.$refs.Scroll.scroll.refresh()
+    })
   },
   methods: {
     /* 事件监听基本方法 */

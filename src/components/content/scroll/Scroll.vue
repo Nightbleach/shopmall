@@ -38,7 +38,8 @@ export default {
        */
       probeType: this.probeType,
       pullUpLoad: true,
-      click: true
+      click: true,
+      mouseWheel: true
     })
     // 2。监听滚动的位置
     this.scroll.on('scroll', position => {

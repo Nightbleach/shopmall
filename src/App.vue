@@ -21,7 +21,9 @@
 <!--      <v-spacer/>-->
 <!--    </v-app-bar>-->
     <v-content height="1000">
-      <router-view/>
+      <keep-alive>
+        <router-view/>
+      </keep-alive>
     </v-content>
     <Footer/>
   </v-app>
