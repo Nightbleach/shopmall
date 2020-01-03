@@ -21,7 +21,7 @@
 <!--      <v-spacer/>-->
 <!--    </v-app-bar>-->
     <v-content height="1000">
-      <keep-alive>
+      <keep-alive exclude="GoodsDetails">
         <router-view/>
       </keep-alive>
     </v-content>
