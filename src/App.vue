@@ -20,8 +20,8 @@
 <!--      </div>-->
 <!--      <v-spacer/>-->
 <!--    </v-app-bar>-->
-    <v-content height="1000">
-      <keep-alive exclude="GoodsDetails">
+    <v-content height="2000">
+      <keep-alive :exclude="['GoodsDetails', 'SingleItem']">
         <router-view/>
       </keep-alive>
     </v-content>
@@ -40,7 +40,6 @@ export default {
   },
 
   data: () => ({
-    //
   })
 }
 </script>

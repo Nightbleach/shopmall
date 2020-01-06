@@ -126,6 +126,7 @@ export default {
     },
     loadMore () {
       this.getHomeGoods(this.currentType)
+
       /* ---------------有待理解-------------- */
       this.$refs.Scroll.scroll.refresh()
       /* ---------------有待理解-------------- */

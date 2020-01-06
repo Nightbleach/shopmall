@@ -7,6 +7,7 @@ const Cart = () => import('../views/cart/Cart')
 const Profile = () => import('../views/profile/Profile')
 
 const GoodsDetails = () => import ('../views/details-goods/GoodsDetails')
+const SingleItem = () => import ('../views/cart/childCoponent/SingleItem')
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,14 @@ const routes = [
     path: '/details/:iid',
     name: 'details',
     component: GoodsDetails
+  },
+  {
+    path: '/cart/:iid',
+    name: 'singleItem',
+    component: SingleItem
+    // meta: {
+    //   keepAlive: false
+    // }
   }
 ]
 

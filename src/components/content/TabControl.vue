@@ -34,6 +34,7 @@ export default {
   },
   methods: {
     tagClick (index) {
+      // 组件内部发生了点击事件， 但如果想要数据轮换，就要把这个点击事件传到外面
       this.currentIndex = index
       this.$emit('tagClick', index)
     }
