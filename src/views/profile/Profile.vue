@@ -2,6 +2,7 @@
   <v-container fluid>
     <cart-nav/>
     <cart-list/>
+    <cart-count-bar/>
     <Footer/>
   </v-container>
 </template>
@@ -10,12 +11,14 @@
 import Footer from '../../components/Footer'
 import CartNav from './childComponents/CartNav'
 import CartList from './childComponents/CartList'
+import CartCountBar from './childComponents/CartCountBar'
 export default {
   name: 'Profile',
   components: {
     Footer,
     CartNav,
-    CartList
+    CartList,
+    CartCountBar
   }
 }
 </script>

@@ -50,6 +50,7 @@ export default new Vuex.Store({
       } else {
         payload.count = 1
         // context.state.cartList.push(payload)
+        payload.checked = true
         context.commit('addToCart', payload)
       }
     }

@@ -4,7 +4,10 @@
         outlined
       >
         <div class="d-flex flex-no-wrap justify-space-between">
-         <v-checkbox off-icon="fal fa-circle" on-icon="fal fa-check-circle" />
+          <div class="item-selector">
+            <check-button :is-checked="cartItemList.checked"  @click.native="checkClick"/>
+          </div>
+
           <v-avatar
             class="ma-3"
             size="125"
@@ -26,8 +29,12 @@
 </template>
 
 <script>
+import CheckButton from './CheckButton'
 export default {
   name: 'CartItem',
+  components: {
+    CheckButton
+  },
   props: {
     cartItemList: {
       type: Object,
@@ -40,10 +47,20 @@ export default {
     return {
       column: null
     }
+  },
+  methods: {
+    checkClick () {
+      this.cartItemList.checked = !this.cartItemList.checked
+    }
   }
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="stylus">
+  .item-selector
+    width 28px
+    height 35px
+    display flex
+    justify-content center
+    align-content center
 </style>
