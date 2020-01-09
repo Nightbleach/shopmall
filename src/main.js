@@ -5,6 +5,8 @@ import store from './store'
 import vuetify from './plugins/vuetify'
 import '@fortawesome/fontawesome-pro/css/all.css'
 
+Vue.use(require('vue-moment'))
+
 Vue.config.productionTip = false
 Vue.prototype.$bus = new Vue()
 

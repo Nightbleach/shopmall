@@ -4,7 +4,6 @@
 用-----Object.key(对象名).length----如果这个值等于 0 就判断这个对象是空对象
 -->
     <v-container fluid v-if="Object.keys(goods).length !==0" >
-
       <v-row
         no-gutters
       >
@@ -26,7 +25,7 @@ object.key(obj).length === 0   可以判断这个对象是否是空的对象
               </v-chip>
             </span>
           </v-col>
-          <v-row no-gutters class="itemSave pb-4" >
+          <v-row class="itemSave pb-4" >
             <v-col cols="5" class="pa-0">
               <span class="pr-3">{{goods.columns[0]}}</span>
               <span>{{goods.columns[1]}}</span>
@@ -36,10 +35,10 @@ object.key(obj).length === 0   可以判断这个对象是否是空的对象
               <span>{{goods.services[goods.services.length -1].name}}</span>
             </v-col>
           </v-row>
-          <v-row>
-            <v-col>
-              <span v-for = 'index in goods.services.length-1' :key="index" class="text">
-                <img  class="textIcon" :src="goods.services[index -1 ].icon" alt="">
+          <v-row class="text pb-6">
+            <v-col v-for = 'index in goods.services.length-1' :key="index">
+              <span>
+                <img class="textIcon" :src="goods.services[index -1 ].icon" alt="">
                 <span>{{goods.services[index-1].name}}</span>
               </span>
             </v-col>
@@ -70,5 +69,7 @@ export default {
   border-bottom 2px solid #9ea6b2
 .textIcon
   height 14px
+.text
+  border-bottom 2px solid #9ea6b2
 
 </style>

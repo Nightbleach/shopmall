@@ -25,6 +25,29 @@ export class Goods {
     this.discount = itemInfo.discountDesc
     this.columns = columns
     this.services = services
-    this.srealPrice = itemInfo.lowNowPrice
+    this.realPrice = itemInfo.lowNowPrice
   }
 }
+
+export class ShopInfoDetails {
+  constructor (shopInfo) {
+    this.name = shopInfo.name
+    this.shopLogo = shopInfo.shopLogo
+    this.goodsSum = shopInfo.cGoods
+    this.sellSum = shopInfo.cSells
+    this.cFans = shopInfo.cFans
+    this.shopScore = shopInfo.score
+  }
+}
+
+export class ItemParams {
+  constructor (info) {
+    this.infos = info.set
+  }
+}
+// export class ImgInfo {
+//   constructor (detailInfo) {
+//     this.desc = detailInfo.desc
+//     this.detailImage = detailInfo.detailImage.list
+//   }
+// }

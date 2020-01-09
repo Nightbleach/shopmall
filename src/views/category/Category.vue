@@ -91,14 +91,18 @@
         <li>用户数据————————————————87</li>
         <li>用户数据————————————————88</li>
       </ul>
-
+      <Footer/>
     </div>
 </template>
 
 <script>
 import BScroll from 'better-scroll'
+import Footer from '../../components/Footer'
 export default {
   name: 'Category',
+  components: {
+    Footer
+  },
   data () {
     return {
       scroll: null

@@ -1,34 +1,51 @@
 <template>
     <v-container class="pa-0" fluid>
-      <detail-navbar/>
+      <detail-navbar class="detailsNav"/>
       <detail-carousel
         :topImages="topImages"
       />
       <detail-text
         :goods = goods
       />
+      <div>{{$store.state.cartList.length}}</div>
+      <shop-info :shopInfo = shopInfo />
+      <img-details :dateInfo="dateInfo" :imageDetails="imageDetails"/>
+      <goodsparams :itemParams="itemParams" />
+      <product-footer @addCart="addCart"/>
     </v-container>
 </template>
 <script>
 import DetailNavbar from './childCompons/DetailNavbar'
 import DetailCarousel from './childCompons/DetailCarousel'
 import DetailText from './childCompons/DetailText'
-
+import ShopInfo from './childCompons/ShopInfo'
+import ImgDetails from './childCompons/ImgDetails'
+import Goodsparams from './childCompons/Goodsparams'
+import ProductFooter from '../../components/content/ProductFooter'
 // import 网络请求
-import { getDetails, Goods } from '../../network/details'
+
+import { getDetails, Goods, ShopInfoDetails, ItemParams } from '../../network/details'
 
 export default {
   name: 'GoodsDetails',
   components: {
     DetailNavbar,
     DetailCarousel,
-    DetailText
+    DetailText,
+    ShopInfo,
+    ImgDetails,
+    Goodsparams,
+    ProductFooter
   },
   data () {
     return {
       iid: null,
       topImages: null,
-      goods: {}
+      goods: {},
+      shopInfo: {},
+      imageDetails: {},
+      dateInfo: {},
+      itemParams: {}
     }
   },
   created () {
@@ -39,21 +56,39 @@ export default {
       const data = res.result
       // 1 获取图片轮播数据
       this.topImages = data.itemInfo.topImages
+      this.imageDetails = data.detailInfo
+      this.dateInfo = data.rate
+      this.itemParams = new ItemParams(data.itemParams.info)
+      // this.itemParams = data.itemParams
+      // console.log(this.imageDetails)
       // console.log(res)
       // 2 获取商品数据
       this.goods = new Goods(data.itemInfo, data.columns, data.shopInfo.services)
+      this.shopInfo = new ShopInfoDetails(data.shopInfo)
+      // this.imgInfo = new ImgInfo(data.detailInfo)
     })
   },
   methods: {
-    // getDetails (iid) {
-    //   getDetails().then(res => {
-    //     console.log(res)
-    //   })
-    // }
+    addCart () {
+      // 1. 获取购物车需要展示的数据
+      const product = {}
+      product.image = this.topImages[0]
+      product.title = this.goods.title
+      product.desc = this.goods.desc
+      product.price = this.goods.price
+      product.iid = this.iid
+      product.price = this.goods.realPrice
+      // 2. 将商品添加到购物车里
+      // this.$store.commit('addCart', product)
+      this.$store.dispatch('addCart', product)
+    }
   }
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="stylus">
+.detailsNav
+  position fixed
+  top 0
+  z-index 9
 </style>

@@ -4,12 +4,14 @@
     <tag-item :title="title" @tagClick = 'tagClick'/>
     <products :product="product[currentType].list" />
     <v-btn @click ='loadMore' color="yellow">Load More</v-btn>
+    <Footer/>
   </div>
 </template>
 
 <script>
 import TagItem from './childCoponent/TagItem'
 import Products from './childCoponent/Products'
+import Footer from '../../components/Footer'
 
 import { getHomeGoods } from '../../network/home'
 
@@ -17,7 +19,8 @@ export default {
   name: 'Cart',
   components: {
     TagItem,
-    Products
+    Products,
+    Footer
   },
   data () {
     return {

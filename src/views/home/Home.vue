@@ -22,6 +22,7 @@
       <goods-list :goods="goods[currentType].list"/>
     </Scroll>
     <back-top @click.native="backTop" v-show="isShowBackTop" />
+    <Footer/>
   </div>
 </template>
 
@@ -31,6 +32,7 @@
 // 如果是default 则不需要大括号包裹
 import { getHomeMultidata, getHomeGoods } from '../../network/home'
 import Navbar from '../../components/Navbar'
+import Footer from '../../components/Footer'
 import Carousel from './chileComponents/Carousel'
 import Avatars from './chileComponents/Avatars'
 import FeatureView from './chileComponents/FeatureView'
@@ -63,7 +65,8 @@ export default {
     TabControl,
     GoodsList,
     Scroll,
-    BackTop
+    BackTop,
+    Footer
   },
   created () {
     /*
