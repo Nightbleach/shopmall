@@ -80,7 +80,25 @@ export default {
       product.price = this.goods.realPrice
       // 2. 将商品添加到购物车里
       // this.$store.commit('addCart', product)
-      this.$store.dispatch('addCart', product)
+      this.$store.dispatch('addCart', product).then(res => {
+        this.$toasted.show('已经添加到购物车', {
+          position: 'top-center',
+          duration: 2000,
+          // onComplete () {
+          //   // console.log('1231234')
+          //   this.$router.push('/')
+          // }
+          action: {
+            text: 'Undo',
+            push: {
+              name: 'profile',
+              dontClose: true
+            }
+          }
+        })
+      })
+
+      // 3 添加购物车成功 并出现一个弹窗 因为上面的dispatch会返回一个promise
     }
   }
 }

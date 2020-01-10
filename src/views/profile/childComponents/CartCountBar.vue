@@ -2,7 +2,7 @@
     <v-container fluid class="countBar grey" >
      <v-row align-content="center" no-gutters >
        <v-col cols="1">
-         <check-button class="checkBtn"/>
+         <check-button @click.native="checkClick" :is-checked="selectAll" class="checkBtn"/>
        </v-col>
        <v-col><span>全选</span></v-col>
        <v-col><span>商品总价格：{{getSumPrice}}</span>
@@ -34,6 +34,28 @@ export default {
       // return this.$store.state.cartList.filter(item => {
       //   return (item.checked).length
       // })
+    },
+    selectAll () {
+      if (this.$store.state.cartList.length === 0) return false
+      return !this.$store.state.cartList.find(item => !item.checked)
+    }
+  },
+  methods: {
+    checkClick () {
+      // if (this.selectAll) { // 全部选中
+      //   this.$store.state.cartList.forEach(item => item.checked = false)
+      // } else {
+      //   this.$store.state.cartList.forEach(item => item.checked = true)
+      // }
+      if (this.selectAll) {
+        this.$store.state.cartList.forEach(item => {
+          item.checked = false
+        })
+      } else {
+        this.$store.state.cartList.forEach(item => {
+          item.checked = true
+        })
+      }
     }
   }
 }

@@ -30,7 +30,8 @@ const routes = [
   {
     path: '/profile',
     name: 'profile',
-    component: Profile
+    component: Profile,
+    linkActiveClass: 'active'
   },
   {
     path: '/details/:iid',

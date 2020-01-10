@@ -4,9 +4,12 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
 import '@fortawesome/fontawesome-pro/css/all.css'
+import Toasted from 'vue-toasted'
 
 Vue.use(require('vue-moment'))
-
+Vue.use(Toasted, {
+  router
+})
 Vue.config.productionTip = false
 Vue.prototype.$bus = new Vue()
 
