@@ -1,6 +1,6 @@
 <template>
 <v-card flat class="mx-auto ma-1" max-width="320" @click="itemClick">
-  <img :src="goodsItem.show.img" alt="" @load="loadImage">
+  <img v-lazy="goodsItem.show.img" alt="" @load="loadImage" >
   <v-card-subtitle class="py-0">{{goodsItem.title}}</v-card-subtitle>
   <v-card-text class="text-center">
       <span class="pink--text">${{goodsItem.price}}

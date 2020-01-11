@@ -6,8 +6,10 @@ import vuetify from './plugins/vuetify'
 import '@fortawesome/fontawesome-pro/css/all.css'
 import Toasted from 'vue-toasted'
 import fastclick from 'fastclick'
+import VueLazyload from 'vue-lazyload'
 
 Vue.use(require('vue-moment'))
+Vue.use(VueLazyload)
 Vue.use(Toasted, {
   router
 })
