@@ -84,17 +84,23 @@ export default {
         this.$toasted.show('已经添加到购物车', {
           position: 'top-center',
           duration: 2000,
+          fullWidth: true,
+          Icon: 'fas fa-cart-plus',
+          theme: 'bubble',
+          action: {
+            class: 'backColor'
+          }
           // onComplete () {
           //   // console.log('1231234')
           //   this.$router.push('/')
           // }
-          action: {
-            text: 'Undo',
-            push: {
-              name: 'profile',
-              dontClose: true
-            }
-          }
+          // action: {
+          //   text: 'Undo',
+          //   push: {
+          //     name: 'profile',
+          //     dontClose: true
+          //   }
+          // }
         })
       })
 
@@ -109,4 +115,8 @@ export default {
   position fixed
   top 0
   z-index 9
+.backColor
+  background-color #ff8198 !important
+  color #ff8198
+
 </style>

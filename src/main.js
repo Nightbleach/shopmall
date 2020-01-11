@@ -5,11 +5,13 @@ import store from './store'
 import vuetify from './plugins/vuetify'
 import '@fortawesome/fontawesome-pro/css/all.css'
 import Toasted from 'vue-toasted'
+import fastclick from 'fastclick'
 
 Vue.use(require('vue-moment'))
 Vue.use(Toasted, {
   router
 })
+fastclick.attach(document.body)
 Vue.config.productionTip = false
 Vue.prototype.$bus = new Vue()
 
